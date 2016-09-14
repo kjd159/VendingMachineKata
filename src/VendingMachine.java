@@ -7,7 +7,9 @@ public class VendingMachine {
 
     }
     public void acceptCoins(double coin){
-        total += coin;
+        if (coin != .01) {
+            total += coin;
+        }
     }
     public double getTotal(){
         return total;
