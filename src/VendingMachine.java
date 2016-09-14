@@ -7,7 +7,7 @@ public class VendingMachine {
 
     }
     public void acceptCoins(double coin){
-        total = coin;
+        total += coin;
     }
     public double getTotal(){
         return total;
