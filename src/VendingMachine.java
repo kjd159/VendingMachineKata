@@ -10,6 +10,7 @@ public class VendingMachine {
         if (coin != .01) {
             total += coin;
         }
+        System.out.print(total + "\n");
     }
     public double getTotal(){
         return total;

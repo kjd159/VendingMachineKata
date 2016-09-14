@@ -1,14 +1,21 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 
 public class VendingMachineTest {
     VendingMachine vendingMachine;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
 
     @Before
     public void setUp(){
         vendingMachine = new VendingMachine();
+        System.setOut(new PrintStream(outContent));
     }
 
     @Test
@@ -39,5 +46,24 @@ public class VendingMachineTest {
         vendingMachine.acceptCoins(.01);
         vendingMachine.acceptCoins(.25);
         assertEquals(.4,vendingMachine.getTotal(), .05);
+    }
+
+    @Test
+    public void vendingMachineUpdatesDisplayAfterAcceptsCoin(){
+        vendingMachine.acceptCoins(.25);
+        assertEquals("0.25\n", outContent.toString());
+    }
+
+    @Test
+    public void displayUpdatesAfterMultipleCoinsAreAdded(){
+        vendingMachine.acceptCoins(.1);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.05);
+        assertEquals(".39", outContent.toString().substring(10,13));
+    }
+
+    @After
+    public void cleanUp(){
+        System.setOut(null);
     }
 }
