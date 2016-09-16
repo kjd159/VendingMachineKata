@@ -18,14 +18,20 @@ public class VendingMachine {
 
     }
     public void selectProduct(String product){
-        if (product == "Cola") {
-            System.out.println("1 Cola Dispensed");
-            System.out.println("THANK YOU");
+        switch (product){
+            case "Cola":
+                System.out.println("1 Cola Dispensed");
+                break;
+            case "Chips":
+                System.out.println("1 Chips Dispensed");
+                break;
+            case "Candy":
+                System.out.println("1 Candy Dispensed");
+                break;
+            default:
+                System.out.println("INSERT COIN");
         }
-        else{
-            System.out.println("1 Chips Dispensed");
-            System.out.println("THANK YOU");
-        }
+        System.out.println("THANK YOU");
     }
     public double getTotal(){
         return total;
