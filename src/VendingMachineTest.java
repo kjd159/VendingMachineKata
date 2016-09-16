@@ -79,6 +79,11 @@ public class VendingMachineTest {
         assertEquals("1 Cola Dispensed\nTHANK YOU\n", outContent.toString().substring(12));
     }
 
+    @Test
+    public void selectProductChipsDispenses(){
+        vendingMachine.selectProduct("Chips");
+        assertEquals("1 Chips Dispensed\nTHANK YOU\n", outContent.toString().substring(12));
+    }
 
     @After
     public void cleanUp(){
