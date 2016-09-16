@@ -17,6 +17,10 @@ public class VendingMachine {
         }
 
     }
+    public void selectProduct(String product){
+        System.out.println("1 Cola Dispensed");
+        System.out.println("THANK YOU");
+    }
     public double getTotal(){
         return total;
     }

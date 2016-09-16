@@ -73,6 +73,13 @@ public class VendingMachineTest {
         assertEquals("INSERT COIN\n", outContent.toString());
     }
 
+    @Test
+    public void selectProductColaDispenses(){
+        vendingMachine.selectProduct("Cola");
+        assertEquals("1 Cola Dispensed\nTHANK YOU\n", outContent.toString().substring(12));
+    }
+
+
     @After
     public void cleanUp(){
         System.setOut(null);
