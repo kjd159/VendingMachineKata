@@ -55,11 +55,17 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void displayUpdatesAfterMultipleCoinsAreAdded(){
+    public void displayUpdatesAfterMultipleAcceptsCoins(){
         vendingMachine.acceptCoins(.1);
         vendingMachine.acceptCoins(.25);
         vendingMachine.acceptCoins(.05);
         assertEquals(".39", outContent.toString().substring(10,13));
+    }
+
+    @Test
+    public void rejectedCoinsGetPutIntoCoinReturn(){
+        vendingMachine.acceptCoins(.01);
+        assertEquals("Coin rejected, please retrieve 0.01 from coin return", outContent.toString());
     }
 
     @After
