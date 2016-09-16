@@ -14,8 +14,8 @@ public class VendingMachineTest {
 
     @Before
     public void setUp(){
-        vendingMachine = new VendingMachine();
         System.setOut(new PrintStream(outContent));
+        vendingMachine = new VendingMachine();
     }
 
     @Test
@@ -51,7 +51,7 @@ public class VendingMachineTest {
     @Test
     public void vendingMachineUpdatesDisplayAfterAcceptsCoin(){
         vendingMachine.acceptCoins(.25);
-        assertEquals("0.25\n", outContent.toString());
+        assertEquals("0.25", outContent.toString().substring(12,16));
     }
 
     @Test
@@ -59,13 +59,18 @@ public class VendingMachineTest {
         vendingMachine.acceptCoins(.1);
         vendingMachine.acceptCoins(.25);
         vendingMachine.acceptCoins(.05);
-        assertEquals(".39", outContent.toString().substring(10,13));
+        assertEquals(".39", outContent.toString().substring(22,25));
     }
 
     @Test
     public void rejectedCoinsGetPutIntoCoinReturn(){
         vendingMachine.acceptCoins(.01);
-        assertEquals("Coin rejected, please retrieve 0.01 from coin return", outContent.toString());
+        assertEquals("Coin rejected, please retrieve 0.01 from coin return", outContent.toString().substring(12));
+    }
+
+    @Test
+    public void whenThereAreNoCoinsDisplayShowsINSERTCOIN(){
+        assertEquals("INSERT COIN\n", outContent.toString());
     }
 
     @After

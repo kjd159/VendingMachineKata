@@ -4,6 +4,7 @@ public class VendingMachine {
     private double total;
 
     public VendingMachine(){
+        System.out.println("INSERT COIN");
 
     }
     public void acceptCoins(double coin){
