@@ -75,20 +75,48 @@ public class VendingMachineTest {
 
     @Test
     public void selectProductColaDispenses(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
         vendingMachine.selectProduct("Cola");
-        assertEquals("1 Cola Dispensed\nTHANK YOU\n", outContent.toString().substring(12));
+        assertEquals("1 Cola Dispensed\nTHANK YOU\n", outContent.toString().substring(30));
     }
 
     @Test
     public void selectProductChipsDispenses(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
         vendingMachine.selectProduct("Chips");
-        assertEquals("1 Chips Dispensed\nTHANK YOU\n", outContent.toString().substring(12));
+        assertEquals("1 Chips Dispensed\nTHANK YOU\n", outContent.toString().substring(21));
     }
 
     @Test
     public void selectProductCandyDispenses(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.05);
+        vendingMachine.acceptCoins(.10);
         vendingMachine.selectProduct("Candy");
-        assertEquals("1 Candy Dispensed\nTHANK YOU\n", outContent.toString().substring(12));
+        assertEquals("1 Candy Dispensed\nTHANK YOU\n", outContent.toString().substring(31));
+    }
+
+    @Test
+    public void selectColaDoesntDispenseIfThereIsntEnoughMoney(){
+        vendingMachine.selectProduct("Cola");
+        assertEquals("$1.00\n",outContent.toString().substring(12));
+    }
+
+    @Test
+    public void selectChipsDoesntDispenseIfThereIsntEnoughMoney(){
+        vendingMachine.selectProduct("Chips");
+        assertEquals("$0.50\n",outContent.toString().substring(12));
+    }
+
+    @Test
+    public void selectCandyDoesntDispenseIfThereIsntEnoughMoney(){
+        vendingMachine.selectProduct("Candy");
+        assertEquals("$0.65\n",outContent.toString().substring(12));
     }
 
     @After
