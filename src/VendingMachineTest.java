@@ -65,7 +65,7 @@ public class VendingMachineTest {
     @Test
     public void rejectedCoinsGetPutIntoCoinReturn(){
         vendingMachine.acceptCoins(.01);
-        assertEquals("Coin rejected, please retrieve 0.01 from coin return", outContent.toString().substring(12));
+        assertEquals("Coin Return: .01", outContent.toString().substring(12));
     }
 
     @Test
@@ -117,6 +117,14 @@ public class VendingMachineTest {
     public void selectCandyDoesntDispenseIfThereIsntEnoughMoney(){
         vendingMachine.selectProduct("Candy");
         assertEquals("$0.65\n",outContent.toString().substring(12));
+    }
+
+    @Test
+    public void coinReturnOutputsCorrectChangeUsingMakeChange(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.1);
+        vendingMachine.makeChange();
+        assertEquals("Coin Return: 0.25\nCoin Return: 0.1\n", outContent.toString().substring(22));
     }
 
     @After

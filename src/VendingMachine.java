@@ -1,20 +1,23 @@
-
+import java.util.ArrayList;
 
 public class VendingMachine {
     private double total;
+    private ArrayList<Double> coinCollection;
 
     public VendingMachine(){
         System.out.println("INSERT COIN");
+        coinCollection = new ArrayList<Double>();
 
     }
 
     public void acceptCoins(double coin){
         if (coin != .01) {
             total += coin;
+            coinCollection.add(coin);
             System.out.print(total + "\n");
         }
         else{
-            System.out.print("Coin rejected, please retrieve 0.01 from coin return");
+            System.out.print("Coin Return: .01");
         }
 
     }
@@ -23,6 +26,12 @@ public class VendingMachine {
         boolean canDisplay = testPriceOfProduct(product);
         if (canDisplay) {
             displayProduct(product);
+        }
+    }
+
+    public void makeChange(){
+        for (int i = 0; i < coinCollection.size(); i += 1){
+            System.out.println("Coin Return: " + coinCollection.get(i));
         }
     }
 
