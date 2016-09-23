@@ -33,6 +33,7 @@ public class VendingMachine {
         for (int i = 0; i < coinCollection.size(); i += 1){
             System.out.println("Coin Return: " + coinCollection.get(i));
         }
+        System.out.println("INSERT COIN");
         total = 0;
         coinCollection.clear();
     }
