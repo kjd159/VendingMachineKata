@@ -120,11 +120,22 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void coinReturnOutputsCorrectChangeUsingMakeChange(){
+    public void coinReturnOutputsCorrectChangeUsingReturnCoins(){
         vendingMachine.acceptCoins(.25);
         vendingMachine.acceptCoins(.1);
-        vendingMachine.makeChange();
+        vendingMachine.returnCoins();
         assertEquals("Coin Return: 0.25\nCoin Return: 0.1\n", outContent.toString().substring(22));
+    }
+
+    @Test
+    public void coinReturnAndCoinTotalResetsAfterReturnCoins(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.1);
+        vendingMachine.returnCoins();
+        vendingMachine.acceptCoins(.05);
+        vendingMachine.returnCoins();
+        assertEquals(0.0, vendingMachine.getTotal(), .5);
+        assertEquals("Coin Return: 0.05\n", outContent.toString().substring(62));
     }
 
     @After

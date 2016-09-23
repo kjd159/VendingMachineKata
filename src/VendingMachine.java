@@ -29,10 +29,12 @@ public class VendingMachine {
         }
     }
 
-    public void makeChange(){
+    public void returnCoins(){
         for (int i = 0; i < coinCollection.size(); i += 1){
             System.out.println("Coin Return: " + coinCollection.get(i));
         }
+        total = 0;
+        coinCollection.clear();
     }
 
     private boolean testPriceOfProduct(String product) {
