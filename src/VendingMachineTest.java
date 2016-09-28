@@ -102,6 +102,16 @@ public class VendingMachineTest {
     }
 
     @Test
+    public void afterSelectProductTotalResets(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.05);
+        vendingMachine.acceptCoins(.10);
+        vendingMachine.selectProduct("Candy");
+        assertEquals(0.0, vendingMachine.getTotal(), .05);
+    }
+
+    @Test
     public void selectColaDoesntDispenseIfThereIsntEnoughMoney(){
         vendingMachine.selectProduct("Cola");
         assertEquals("$1.00\n",outContent.toString().substring(12));
@@ -136,6 +146,19 @@ public class VendingMachineTest {
         vendingMachine.returnCoins();
         assertEquals(0.0, vendingMachine.getTotal(), .5);
         assertEquals("Coin Return: 0.05\nINSERT COIN\n", outContent.toString().substring(74));
+    }
+
+    @Test
+    public void coinReturnOutputsCorrectChangeIfProductSelectedIsLessThanTotal(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        System.out.println();
+        vendingMachine.selectProduct("Cola");
+        assertEquals("1 Cola Dispensed\nTHANK YOU\nCoin Return: 0.25\nINSERT COIN\n",
+                outContent.toString().substring(36));
     }
 
     @After
