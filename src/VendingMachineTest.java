@@ -193,6 +193,41 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT\n2.5\nTHANK YOU\n", outContent.toString().substring(173));
     }
 
+    @Test
+    public void vendingMachineSellsOutOfCandy(){
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        System.out.println();
+        vendingMachine.selectProduct("Candy");
+        vendingMachine.selectProduct("Candy");
+        vendingMachine.selectProduct("Candy");
+        vendingMachine.selectProduct("Candy");
+        vendingMachine.selectProduct("Candy");
+        vendingMachine.selectProduct("Candy");
+        assertEquals("SOLD OUT\n1.75\nTHANK YOU\n", outContent.toString().substring(173));
+    }
+
+    @Test
+    public void vendingMachineSellsOutOfCola(){
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        System.out.println();
+        vendingMachine.selectProduct("Cola");
+        vendingMachine.selectProduct("Cola");
+        vendingMachine.selectProduct("Cola");
+        vendingMachine.selectProduct("Cola");
+        vendingMachine.selectProduct("Cola");
+        vendingMachine.selectProduct("Cola");
+        assertEquals("SOLD OUT\n1.0\nTHANK YOU\n", outContent.toString().substring(172));
+    }
+
     @After
     public void cleanUp(){
         System.setOut(null);
