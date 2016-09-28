@@ -27,10 +27,11 @@ public class VendingMachine {
         if (canDisplay) {
             displayProduct(product);
         }
-        makeChange();
+        if (total > 0){
+            makeChange();
+        }
         total = 0;
         coinCollection.clear();
-        System.out.println("INSERT COIN");
     }
 
     public void returnCoins(){
@@ -43,16 +44,24 @@ public class VendingMachine {
     }
 
     private void makeChange(){
-        if (total != 0){
-            if (total >= .25){
-                Double doubleQuarters = total/.25;
-                int numberOfQuarters = doubleQuarters.intValue();
-                for (int i = 0; i < numberOfQuarters; i += 1){
-                    System.out.println("Coin Return: " + .25);
-                }
-                total = total - (numberOfQuarters*.25);
-            }
+        if (total >= .25){
+            subtractAllCoinsOfType(.25);
         }
+        if (total >= .1){
+            subtractAllCoinsOfType(.1);
+        }
+        if (total >= .05){
+            subtractAllCoinsOfType(.05);
+        }
+    }
+
+    private void subtractAllCoinsOfType(double coin){
+        Double doubleCoins = total/coin;
+        int numberOfCoins = doubleCoins.intValue();
+        for (int i =0; i < numberOfCoins; i += 1){
+            System.out.println("Coin Return: " + coin);
+        }
+        total = total - (numberOfCoins*coin);
     }
 
     private boolean testPriceOfProduct(String product) {

@@ -149,7 +149,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void coinReturnOutputsCorrectChangeIfProductSelectedIsLessThanTotal(){
+    public void makeChangeOutputsCorrectChangeIfProductSelectedIsLessThanTotalDivisiableByQuarters(){
         vendingMachine.acceptCoins(.25);
         vendingMachine.acceptCoins(.25);
         vendingMachine.acceptCoins(.25);
@@ -157,8 +157,21 @@ public class VendingMachineTest {
         vendingMachine.acceptCoins(.25);
         System.out.println();
         vendingMachine.selectProduct("Cola");
-        assertEquals("1 Cola Dispensed\nTHANK YOU\nCoin Return: 0.25\nINSERT COIN\n",
+        assertEquals("1 Cola Dispensed\nTHANK YOU\nCoin Return: 0.25\n",
                 outContent.toString().substring(36));
+    }
+
+    @Test
+    public void makeChangeOutputsCorrectChangeWithRandomSelectionOfCoins(){
+        vendingMachine.acceptCoins(.10);
+        vendingMachine.acceptCoins(.05);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        System.out.println();
+        vendingMachine.selectProduct("Chips");
+        assertEquals("1 Chips Dispensed\nTHANK YOU\nCoin Return: 0.25\nCoin Return: 0.1\nCoin Return: 0.05\n",
+                outContent.toString().substring(50));
     }
 
     @After
