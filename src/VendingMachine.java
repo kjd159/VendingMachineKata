@@ -3,10 +3,16 @@ import java.util.ArrayList;
 public class VendingMachine {
     private double total;
     private ArrayList<Double> coinCollection;
+    private int numberCandy;
+    private int numberChips;
+    private int numberCola;
 
     public VendingMachine(){
         System.out.println("INSERT COIN");
         coinCollection = new ArrayList<Double>();
+        numberCandy = 5;
+        numberChips = 5;
+        numberCola = 5;
 
     }
 
@@ -27,11 +33,6 @@ public class VendingMachine {
         if (canDisplay) {
             displayProduct(product);
         }
-        if (total > 0){
-            makeChange();
-        }
-        total = 0;
-        coinCollection.clear();
     }
 
     public void returnCoins(){
@@ -43,7 +44,10 @@ public class VendingMachine {
         coinCollection.clear();
     }
 
-    private void makeChange(){
+    public void makeChange(){
+        if (total == 0){
+            return;
+        }
         if (total >= .25){
             subtractAllCoinsOfType(.25);
         }
@@ -53,6 +57,48 @@ public class VendingMachine {
         if (total >= .05){
             subtractAllCoinsOfType(.05);
         }
+        total = 0;
+        coinCollection.clear();
+    }
+
+    private boolean isProductSoldOut(String product){
+        boolean isSoldOut = false;
+        switch (product){
+            case "Cola":
+                if (numberCola == 0){
+                    System.out.println("SOLD OUT");
+                    System.out.println(total);
+                    isSoldOut = false;
+                }
+                else{
+                    isSoldOut = true;
+                }
+                break;
+            case "Chips":
+                if (numberChips == 0){
+                    System.out.println("SOLD OUT");
+                    System.out.println(total);
+                    isSoldOut = false;
+                }
+                else{
+                    isSoldOut = true;
+                }
+                break;
+            case "Candy":
+                if (numberCandy == 0){
+                    System.out.println("SOLD OUT");
+                    System.out.println(total);
+                    isSoldOut = false;
+                }
+                else {
+                    isSoldOut = true;
+                }
+                break;
+            default:
+                System.out.println("INSERT COIN");
+                break;
+        }
+        return isSoldOut;
     }
 
     private void subtractAllCoinsOfType(double coin){
@@ -96,18 +142,28 @@ public class VendingMachine {
     }
 
     private void displayProduct(String product) {
+        boolean isSoldOut = isProductSoldOut(product);
         switch (product){
             case "Cola":
-                System.out.println("1 Cola Dispensed");
-                total = total - 1.00;
+                if (isSoldOut) {
+                    System.out.println("1 Cola Dispensed");
+                    total = total - 1.00;
+                    numberCola -= 1;
+                }
                 break;
             case "Chips":
-                System.out.println("1 Chips Dispensed");
-                total = total - .50;
+                if (isSoldOut) {
+                    System.out.println("1 Chips Dispensed");
+                    total = total - .50;
+                    numberChips -= 1;
+                }
                 break;
             case "Candy":
-                System.out.println("1 Candy Dispensed");
-                total = total - .65;
+                if (isSoldOut) {
+                    System.out.println("1 Candy Dispensed");
+                    total = total - .65;
+                    numberCandy -= 1;
+                }
                 break;
             default:
                 System.out.println("INSERT COIN");
@@ -118,5 +174,17 @@ public class VendingMachine {
 
     public double getTotal(){
         return total;
+    }
+
+    public void setNumberCandy(int candy){
+        numberCandy = candy;
+    }
+
+    public void setNumberChips(int chips){
+        numberChips = chips;
+    }
+
+    public void setNumberCola(int cola){
+        numberCola = cola;
     }
 }

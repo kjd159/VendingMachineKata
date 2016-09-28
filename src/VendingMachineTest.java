@@ -157,6 +157,7 @@ public class VendingMachineTest {
         vendingMachine.acceptCoins(.25);
         System.out.println();
         vendingMachine.selectProduct("Cola");
+        vendingMachine.makeChange();
         assertEquals("1 Cola Dispensed\nTHANK YOU\nCoin Return: 0.25\n",
                 outContent.toString().substring(36));
     }
@@ -170,8 +171,26 @@ public class VendingMachineTest {
         vendingMachine.acceptCoins(.25);
         System.out.println();
         vendingMachine.selectProduct("Chips");
+        vendingMachine.makeChange();
         assertEquals("1 Chips Dispensed\nTHANK YOU\nCoin Return: 0.25\nCoin Return: 0.1\nCoin Return: 0.05\n",
                 outContent.toString().substring(50));
+    }
+
+    @Test
+    public void vendingMachineSellsOutOfChips(){
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        vendingMachine.acceptCoins(1.00);
+        System.out.println();
+        vendingMachine.selectProduct("Chips");
+        vendingMachine.selectProduct("Chips");
+        vendingMachine.selectProduct("Chips");
+        vendingMachine.selectProduct("Chips");
+        vendingMachine.selectProduct("Chips");
+        vendingMachine.selectProduct("Chips");
+        assertEquals("SOLD OUT\n2.5\nTHANK YOU\n", outContent.toString().substring(173));
     }
 
     @After
