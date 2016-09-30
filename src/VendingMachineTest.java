@@ -228,6 +228,21 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT\n1.0\nTHANK YOU\n", outContent.toString().substring(172));
     }
 
+    @Test
+    public void ifVendingMachineRunsOutOfQuartersItMakesChangeWithOtherCoins(){
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        vendingMachine.acceptCoins(.25);
+        System.out.println();
+
+        vendingMachine.makeChange();
+        assertEquals("Coin Return: 0.25\nCoin Return: 0.1\nCoin Return: 0.1\n", outContent.toString().substring(130));
+
+    }
+
     @After
     public void cleanUp(){
         System.setOut(null);

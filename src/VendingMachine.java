@@ -6,6 +6,9 @@ public class VendingMachine {
     private int numberCandy;
     private int numberChips;
     private int numberCola;
+    private int numberQuarters;
+    private int numberDimes;
+    private int numberNickels;
 
     public VendingMachine(){
         System.out.println("INSERT COIN");
@@ -13,6 +16,9 @@ public class VendingMachine {
         numberCandy = 5;
         numberChips = 5;
         numberCola = 5;
+        numberQuarters = 5;
+        numberDimes = 10;
+        numberNickels = 5;
 
     }
 
@@ -107,8 +113,39 @@ public class VendingMachine {
         for (int i =0; i < numberOfCoins; i += 1){
             System.out.println("Coin Return: " + coin);
         }
-        total = total - (numberOfCoins*coin);
+
+        if (coin == .25){
+            int remainingQuarters = numberQuarters - numberOfCoins;
+            if (remainingQuarters < 0){
+                total = total - (numberOfCoins*coin) + (-1*(remainingQuarters)*.25);
+            }
+            return;
+        }
+        else {
+            total = total - (numberOfCoins * coin);
+        }
+        if (coin == .1){
+            int remainingDimes = numberDimes - numberOfCoins;
+            if (remainingDimes < 0){
+                total = total - (numberOfCoins*coin) + (-1*(remainingDimes)*.1);
+            }
+            return;
+        }
+        else {
+            total = total - (numberOfCoins * coin);
+        }
+        if (coin == .05){
+            int remainingNickels = numberNickels - numberOfCoins;
+            if (remainingNickels < 0){
+                total = total - (numberOfCoins*coin) + (-1*(remainingNickels)*.05);
+            }
+            return;
+        }
+        else {
+            total = total - (numberOfCoins * coin);
+        }
     }
+
 
     private boolean testPriceOfProduct(String product) {
         boolean canDisplay = true;
@@ -186,5 +223,17 @@ public class VendingMachine {
 
     public void setNumberCola(int cola){
         numberCola = cola;
+    }
+
+    public void setNumberQuarters(int quarters){
+        numberQuarters = quarters;
+    }
+
+    public void setNumberDimes(int dimes){
+        numberDimes = dimes;
+    }
+
+    public void setNumberNickels(int nickels){
+        numberNickels = nickels;
     }
 }
